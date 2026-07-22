@@ -1,11 +1,9 @@
 {
-  "version": 2,
-  "public": true,
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)\\.(js|css|svg|png|jpg|ico|webp)",
+      "source": "/(.*)\\.(js|css|svg|png|jpg|jpeg|gif|ico|webp)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -21,13 +19,6 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/index.html",
-      "permanent": true
     }
   ]
 }
