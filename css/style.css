@@ -30,7 +30,7 @@
   --space-3xl: 4rem;
 
   /* Layout */
-  --max-width: 1200px;
+  --max-width: 1400px;
   --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --box-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
 
@@ -398,6 +398,17 @@ p {
   box-shadow: var(--box-shadow-hover);
 }
 
+/* --- Shelter Grid Cards: even height + bottom-aligned actions --- */
+#contact-shelters-grid .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#contact-shelters-grid .card > div:last-child {
+  margin-top: auto;
+}
+
 .card-img {
   width: 100%;
   height: 220px;
@@ -468,14 +479,15 @@ p {
   gap: var(--space-lg);
 }
 
+.grid-1 { grid-template-columns: 1fr; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
 
-/* --- Centered Pet Grid --- */
+/* --- Pet Grid --- */
 .pet-grid {
-  justify-items: center;
-  text-align: center;
+  align-items: stretch;
 }
 
 .pet-grid > .empty-state,
@@ -599,9 +611,9 @@ p {
   width: 40px;
   height: 40px;
   border: 4px solid var(--light-gray);
-      border-top-color: var(--forest-green);
-      border-radius: 0;
-      animation: spin 0.8s linear infinite;
+  border-top-color: var(--forest-green);
+  border-radius: 50%;  
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -701,6 +713,8 @@ p {
   display: flex;
   flex-direction: column;
   text-align: left;
+  width: 100%;
+  height: 100%;
 }
 
 .pet-card:hover {
@@ -710,14 +724,14 @@ p {
 
 .pet-card-img {
   width: 100%;
-  height: 240px;
-  object-fit: cover;
+  height: 280px;
+  object-fit: contain;
   background-color: var(--light-gray);
 }
 
 .pet-card-img-placeholder {
   width: 100%;
-  height: 240px;
+  height: 280px;
   background-color: var(--light-gray);
   display: flex;
   align-items: center;
@@ -727,7 +741,7 @@ p {
 }
 
 .pet-card-body {
-  padding: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -735,7 +749,7 @@ p {
 
 .pet-card-body h3 {
   margin-bottom: var(--space-xs);
-  font-size: 1.2rem;
+  font-size: 1.35rem;
 }
 
 .pet-card-body .pet-breed {
@@ -746,20 +760,21 @@ p {
 
 .pet-card-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+  flex-wrap: nowrap;
+  gap: 4px;
   margin-bottom: var(--space-md);
   margin-top: auto;
 }
 
 .pet-card-tag {
   display: inline-block;
-  padding: 2px 10px;
-  font-size: 0.75rem;
+  padding: 1px 6px;
+  font-size: 0.65rem;
   font-weight: 600;
   background-color: var(--earthy-beige);
   color: var(--forest-green-dark);
   border-radius: 0;
+  white-space: nowrap;
 }
 
 .pet-card-tag.gold {
@@ -774,15 +789,25 @@ p {
 
 /* --- Pet Detail Page Styles --- */
 .back-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-bottom: var(--space-lg);
   color: var(--forest-green);
   font-weight: 600;
   font-size: 1rem;
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 .back-link:hover {
   color: var(--forest-green-light);
+}
+
+.back-link::before {
+  content: '←';
+  font-size: 1.2rem;
+  line-height: 1;
 }
 
 .pet-detail {
@@ -796,7 +821,7 @@ p {
 .pet-detail-hero {
   width: 100%;
   height: 400px;
-  object-fit: cover;
+  object-fit: contain;
   background-color: var(--light-gray);
 }
 
@@ -879,9 +904,10 @@ p {
 .pet-detail-gallery-grid img {
   width: 100%;
   height: 150px;
-  object-fit: cover;
+  object-fit: contain;
   cursor: pointer;
   transition: opacity var(--transition-fast);
+  background-color: var(--light-gray);
 }
 
 .pet-detail-gallery-grid img:hover {
@@ -937,6 +963,13 @@ p {
   color: var(--white);
 }
 
+.pagination .page-ellipsis {
+  padding: 8px 4px;
+  font-size: 0.9rem;
+  color: var(--medium-gray);
+  letter-spacing: 2px;
+}
+
 .pagination button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -983,6 +1016,8 @@ p {
 /* Tablet: 768px - 1024px */
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(3, 1fr); }
+  .grid-5 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Mobile: < 768px */
@@ -1018,7 +1053,8 @@ p {
 
   .grid-2,
   .grid-3,
-  .grid-4 {
+  .grid-4,
+  .grid-5 {
     grid-template-columns: 1fr;
   }
 
